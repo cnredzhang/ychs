@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			img{
+				width: 200px;
+				height:200px;
+			}
+		</style>
+	</head>
+	<body>
+		<img  src="img/on.png" onclick="lamp(this)">
+		<img src="img/fanstart.gif" onclick="fan(this)"/>
+		<script>
+			function lamp(obj){
+				//alert(obj.src)
+				if(obj.src.indexOf('on.png')!=-1)
+					obj.src='img/off.png'
+				else
+					obj.src='img/on.png'
+			}
+			function fan(obj){
+				//alert(obj.src)
+				if(obj.src.indexOf('fanstart.gif')!=-1)
+					obj.src='img/stop.png'
+				else
+					obj.src='img/fanstart.gif'
+			}
+		</script>
+	</body>
+</html>
