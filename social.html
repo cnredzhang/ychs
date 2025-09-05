@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人社保计算器</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h3 class="text-center mb-4">个人社保计算器-张清</h3>
+        <div class="row mb-3">
+            <div class="col-md-1">
+                <label for="salary" class="form-label">工资</label>
+            </div>
+            <div class="col-md-8">
+                <input type="number" class="form-control" id="salary" placeholder="请输入工资">
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-danger w-100" id="calculateBtn" onclick="calc()">计算</button>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="bg-primary-custom">
+                    <th>险种</th>
+                    <th>个人%</th>
+                    <th>个人</th>
+                    <th>公司%</th>
+                    <th>公司</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>养老</td>
+                    <td class="per_person">8%</td>
+                    <td></td>
+                    <td class="per_comp">20%</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>医保</td>
+                    <td class="per_person">2%</td>
+                    <td></td>
+                    <td class="per_comp">6%</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>失业</td>
+                    <td class="per_person">0.5%</td>
+                    <td></td>
+                    <td class="per_comp">1.5%</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>工伤</td>
+                    <td></td>
+                    <td></td>
+                    <td class="per_comp">0.5%</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>生育</td>
+                    <td></td>
+                    <td></td>
+                    <td class="per_comp">0.8%</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>公积金</td>
+                    <td class="per_person">12%</td>
+                    <td></td>
+                    <td class="per_comp">12%</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>合计</td>
+                    <td>个人合计</td>
+                    <td id="total_person"></td>
+                    <td>公司合计</td>
+                    <td id="total_comp"></td>
+                </tr>
+                <tr>
+                    <td>总额</td>
+                    <td colspan="4" id="total"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 引入 Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function calc(){
+			let total_person = 0;
+			let total_comp = 0;
+			let total = 0;
+			let pers = document.getElementsByClassName("per_person");
+			let salary = document.getElementById("salary").value;
+			for(let i=0;i<pers.length;i++){
+				let per = parseFloat(pers[i].innerHTML);
+				let result = salary*per/100;
+				result = result.toFixed(2);
+				pers[i].nextElementSibling.innerHTML=result;
+				total_person = total_person+parseFloat(result);
+			}
+			pers = document.getElementsByClassName("per_comp");
+			for(let i=0;i<pers.length;i++){
+				let per = parseFloat(pers[i].innerHTML);
+				let result = salary*per/100;
+				result = result.toFixed(2);
+				pers[i].nextElementSibling.innerHTML=result;
+				total_comp = total_comp+parseFloat(result);
+			}
+			total_person = total_person.toFixed(2);
+			document.getElementById("total_person").innerHTML = total_person;
+			total_comp = total_comp.toFixed(2);
+			document.getElementById("total_comp").innerHTML = total_comp;
+			total=parseFloat(total_person)+parseFloat(total_comp);
+			total = parseFloat(total).toFixed(2);
+			document.getElementById("total").innerHTML = total;
+		}
+    </script>
+</body>
+
+</html>
